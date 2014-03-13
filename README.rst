@@ -27,7 +27,7 @@ Or you can install package directly from PyPi:
   $ virtualenv --no-site-packages env
   $ env/bin/pip install pygdal==1.8.1
 
-Only a small set of GDAL versions is currently supported. At this point they are: ``1.8.1`` and ``1.10.1``. Package ``numpy`` is also listed as a dependency (using ``setup_requires`` and ``install_requires`` directives), so you do not need to install it before installing GDAL.
+Only a small set of GDAL versions is currently supported. At this point they are: ``1.8.1``, ``1.9.2`` and ``1.10.1``. Package ``numpy`` is also listed as a dependency (using ``setup_requires`` and ``install_requires`` directives), so you do not need to install it before installing GDAL.
 
 After package is installed you can use is same way as standard GDAL bindings:
 
