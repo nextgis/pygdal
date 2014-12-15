@@ -6,7 +6,7 @@ from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '0'
+PKG_VERSION = '1'
 
 ENV_GDALHOME = 'GDALHOME'
 
