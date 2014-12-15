@@ -8,6 +8,8 @@ from setuptools.command.build_ext import build_ext
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
 PKG_VERSION = '0'
 
+ENV_GDALHOME = 'GDALHOME'
+
 
 class GDALConfigError(Exception):
     pass
@@ -55,9 +57,14 @@ class gdal_ext(build_ext):
 
         build_ext.finalize_options(self)
 
+        if ENV_GDALHOME in os.environ:
+            print 'GDAL prefix from environment variable %s' % ENV_GDALHOME
+            self.gdaldir = os.environ[ENV_GDALHOME]
+        else:
+            self.gdaldir = self.get_gdal_config('prefix')
+
         self.include_dirs.append(get_numpy_include())
 
-        self.gdaldir = self.get_gdal_config('prefix')
         self.library_dirs.append(os.path.join(self.gdaldir, 'lib'))
         self.include_dirs.append(os.path.join(self.gdaldir, 'include', 'gdal'))
         self.include_dirs.append(os.path.join(self.gdaldir, 'include'))
