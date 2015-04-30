@@ -25,7 +25,7 @@ def get_numpy_include():
 
 def fetch_config(option, gdal_config='gdal-config'):
     try:
-        return check_output([gdal_config, '--%s' % option]).strip()
+        return check_output([gdal_config, '--%s' % option]).decode('utf-8').strip()
     except CalledProcessError as e:
         raise GDALConfigError(e)
 
@@ -58,7 +58,7 @@ class gdal_ext(build_ext):
         build_ext.finalize_options(self)
 
         if ENV_GDALHOME in os.environ:
-            print 'GDAL prefix from environment variable %s' % ENV_GDALHOME
+            print('GDAL prefix from environment variable %s' % ENV_GDALHOME)
             self.gdaldir = os.environ[ENV_GDALHOME]
         else:
             self.gdaldir = self.get_gdal_config('prefix')
