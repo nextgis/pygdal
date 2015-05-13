@@ -10,9 +10,10 @@ before_install:
   # workaround for <https://askubuntu.com/questions/230952/how-do-i-fix-a-unknown-configuration-key-foreign-architecture-found-in-your>
   - sudo rm /etc/dpkg/dpkg.cfg.d/multiarch
   # workaround for this bug <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776634>
-  - sudo update-alternatives --remove-all liblapack.so.3gf
   - echo "deb http://ru.archive.ubuntu.com/ubuntu/ vivid main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/vidid.list
   - sudo apt-get update -qq
+  - sudo apt-get install -y libgdal1-dev | true
+  - sudo update-alternatives --remove-all liblapack.so.3gf
   - sudo apt-get install -y libgdal1-dev
   - gdal-config --version
 # command to install pygdal
