@@ -14,9 +14,9 @@ before_install:
   - sudo apt-get update -qq
   - sudo update-alternatives --remove-all liblapack.so.3gf
   - sudo update-alternatives --remove-all libblas.so.3gf
-  - sudo apt-get install -y libgdal1-dev | true
-  - sudo update-alternatives --remove-all liblapack.so.3gf
-  - sudo update-alternatives --remove-all libblas.so.3gf
+#  - sudo apt-get install -y libgdal1-dev | true
+#  - sudo update-alternatives --remove-all liblapack.so.3gf
+#  - sudo update-alternatives --remove-all libblas.so.3gf
   - sudo apt-get install -y libgdal1-dev
   - gdal-config --version
 # command to install pygdal
