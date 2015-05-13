@@ -19,6 +19,7 @@ before_install:
 #  - sudo update-alternatives --remove-all libblas.so.3gf
   - sudo apt-get install -y libgdal1-dev
   - gdal-config --version
+  - pip install --upgrade pip
 # command to install pygdal
 install:
   - pip install -v ./$(gdal-config --version)
