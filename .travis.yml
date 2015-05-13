@@ -1,0 +1,17 @@
+language: python
+python:
+#  - "2.6"
+  - "2.7"
+#  - "3.2"
+#  - "3.3"
+  - "3.4"
+# commands to install dependencies
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y libgdal1-dev
+  - gdal-config --version
+# command to install pygdal
+install:
+  - pip install $(gdal-config --version)
+# command to run tests
+script: echo "Done!"
