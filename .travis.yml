@@ -21,6 +21,6 @@ before_install:
   - gdal-config --version
 # command to install pygdal
 install:
-  - pip install ./$(gdal-config --version)
+  - pip install -v ./$(gdal-config --version)
 # command to run tests
 script: echo "Done!"
