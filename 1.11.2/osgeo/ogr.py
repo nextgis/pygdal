@@ -140,7 +140,7 @@ def UseExceptions(*args):
 def DontUseExceptions(*args):
   """DontUseExceptions()"""
   return _ogr.DontUseExceptions(*args)
-import osr
+from osgeo import osr
 class StyleTable(_object):
     """Proxy of C++ OGRStyleTableShadow class"""
     __swig_setmethods__ = {}

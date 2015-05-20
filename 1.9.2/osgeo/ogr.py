@@ -138,7 +138,7 @@ def UseExceptions(*args):
 def DontUseExceptions(*args):
   """DontUseExceptions()"""
   return _ogr.DontUseExceptions(*args)
-import osr
+from osgeo import osr
 class Driver(_object):
     """Proxy of C++ OGRDriverShadow class"""
     __swig_setmethods__ = {}
