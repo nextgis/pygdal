@@ -80,8 +80,8 @@ def deprecation_warn( module ):
        DeprecationWarning)
        
        
-from gdalconst import *
-import gdalconst
+from osgeo.gdalconst import *
+from osgeo import gdalconst
 
 
 import sys
@@ -823,7 +823,7 @@ class Dataset(MajorObject):
         return _gdal.Dataset_ReadRaster1(self, *args, **kwargs)
 
     def ReadAsArray(self, xoff=0, yoff=0, xsize=None, ysize=None, buf_obj=None ):
-        import gdalnumeric
+        from osgeo import gdalnumeric
         return gdalnumeric.DatasetReadAsArray( self, xoff, yoff, xsize, ysize, buf_obj )
     def WriteRaster(self, xoff, yoff, xsize, ysize,
                     buf_string,
@@ -882,7 +882,7 @@ class Dataset(MajorObject):
            Any reference to the array must be dropped before the last reference to the
            related dataset is also dropped.
         """
-        import gdalnumeric
+        from osgeo import gdalnumeric
         if xsize is None:
             xsize = self.RasterXSize
         if ysize is None:
@@ -917,7 +917,7 @@ class Dataset(MajorObject):
            Any reference to the array must be dropped before the last reference to the
            related dataset is also dropped.
         """
-        import gdalnumeric
+        from osgeo import gdalnumeric
         if xsize is None:
             xsize = self.RasterXSize
         if ysize is None:
@@ -1230,14 +1230,14 @@ class Band(MajorObject):
 
     def ReadAsArray(self, xoff=0, yoff=0, win_xsize=None, win_ysize=None,
                     buf_xsize=None, buf_ysize=None, buf_obj=None):
-        import gdalnumeric
+        from osgeo import gdalnumeric
 
         return gdalnumeric.BandReadAsArray( self, xoff, yoff,
                                             win_xsize, win_ysize,
                                             buf_xsize, buf_ysize, buf_obj )
       
     def WriteArray(self, array, xoff=0, yoff=0):
-        import gdalnumeric
+        from osgeo import gdalnumeric
 
         return gdalnumeric.BandWriteArray( self, array, xoff, yoff )
 
@@ -1251,7 +1251,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          import gdalnumeric
+          from osgeo import gdalnumeric
           if xsize is None:
               xsize = self.XSize
           if ysize is None:
@@ -1274,7 +1274,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          import gdalnumeric
+          from osgeo import gdalnumeric
           if options is None:
               virtualmem = self.GetVirtualMemAuto(eAccess)
           else:
@@ -1291,7 +1291,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          import gdalnumeric
+          from osgeo import gdalnumeric
           if xsize is None:
               xsize = self.XSize
           if ysize is None:
@@ -1450,12 +1450,12 @@ class RasterAttributeTable(_object):
         return _gdal.RasterAttributeTable_ChangesAreWrittenToFile(self, *args)
 
     def WriteArray(self, array, field, start=0):
-        import gdalnumeric
+        from osgeo import gdalnumeric
 
         return gdalnumeric.RATWriteArray(self, array, field, start)
 
     def ReadAsArray(self, field, start=0, length=None):
-        import gdalnumeric
+        from osgeo import gdalnumeric
 
         return gdalnumeric.RATReadArray(self, field, start, length)
 
