@@ -3,6 +3,8 @@ pygdal
 
 Virtualenv and setuptools friendly version of standard GDAL python bindings.
 
+|travis-badge|_
+
 This package is for you if you had problems installing GDAL in your virtualenv. You can install GDAL into your virtualenv using this package but you still need to install GDAL library and its header files on your system. On Ubuntu it can be done this way:
 
 ::
@@ -45,3 +47,6 @@ After package is installed you can use is same way as standard GDAL bindings:
 
   from osgeo import gdal
 
+
+.. |travis-badge| image:: https://travis-ci.org/dezhin/pygdal.svg?branch=master
+.. _travis-badge: https://travis-ci.org/dezhin/pygdal
