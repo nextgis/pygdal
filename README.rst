@@ -16,7 +16,7 @@ Version of the same package, and GDAL, so that if you have installed GDAL 1.8.1 
   $ gdal-config --version
   1.8.1
 
-  $ git clone git@github.com:dezhin/pygdal.git
+  $ git clone git@github.com:nextgis/pygdal.git
   $ cd pygdal
   $ virtualenv --no-site-packages env
   $ env/bin/pip install 1.8.1/

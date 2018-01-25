@@ -127,7 +127,7 @@ description = "Virtualenv and setuptools friendly " \
 
 long_description = str(open('README.rst', 'rb').read())
 
-url = "https://github.com/dezhin/pygdal"
+url = "https://github.com/nextgis/pygdal"
 
 license = "MIT"
 
