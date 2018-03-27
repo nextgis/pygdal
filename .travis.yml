@@ -1,19 +1,10 @@
 language: python
 python:
-#  - "2.6"
   - "2.7"
-#  - "3.2"
-#  - "3.3"
   - "3.4"
 # commands to install dependencies
 before_install:
-  # workaround for <https://askubuntu.com/questions/230952/how-do-i-fix-a-unknown-configuration-key-foreign-architecture-found-in-your>
-  - sudo rm /etc/dpkg/dpkg.cfg.d/multiarch
-  # workaround for this bug <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=776634>
-  - echo "deb http://ru.archive.ubuntu.com/ubuntu/ vivid main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/vidid.list
   - sudo apt-get update -qq
-  - sudo update-alternatives --remove-all liblapack.so.3gf
-  - sudo update-alternatives --remove-all libblas.so.3gf
   - sudo apt-get install -y libgdal1-dev
   - gdal-config --version
   - pip install --upgrade pip
