@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 from subprocess import check_output, CalledProcessError
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
+from distutils.errors import CompileError
+
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '3'
+PKG_VERSION = '4'
 
 ENV_GDALHOME = 'GDALHOME'
 
@@ -30,6 +33,44 @@ def fetch_config(option, gdal_config='gdal-config'):
         raise GDALConfigError(e)
 
 
+def supports_cxx11(compiler, compiler_flag=None):
+    ret = False
+    with open('gdal_python_cxx11_test.cpp', 'wt') as f:
+        f.write("""
+#if __cplusplus < 201103L
+#error "C++11 required"
+#endif
+int main () { return 0; }""")
+        f.close()
+        extra_postargs = None
+        if compiler_flag:
+            extra_postargs = [compiler_flag]
+
+        if os.name == 'posix':
+            # Redirect stderr to /dev/null to hide any error messages
+            # from the compiler.
+            devnull = open(os.devnull, 'w')
+            oldstderr = os.dup(sys.stderr.fileno())
+            os.dup2(devnull.fileno(), sys.stderr.fileno())
+            try:
+                compiler.compile([f.name], extra_postargs=extra_postargs)
+                ret = True
+            except CompileError:
+                pass
+            os.dup2(oldstderr, sys.stderr.fileno())
+            devnull.close()
+        else:
+            try:
+                compiler.compile([f.name], extra_postargs=extra_postargs)
+                ret = True
+            except CompileError:
+                pass
+    os.unlink('gdal_python_cxx11_test.cpp')
+    if os.path.exists('gdal_python_cxx11_test.o'):
+        os.unlink('gdal_python_cxx11_test.o')
+    return ret
+
+
 class gdal_ext(build_ext):
 
     GDAL_CONFIG = 'gdal-config'
@@ -47,9 +88,24 @@ class gdal_ext(build_ext):
 
         self.gdaldir = None
         self.gdal_config = self.GDAL_CONFIG
+        self.extra_cflags = []
 
     def get_gdal_config(self, option):
         return fetch_config(option, gdal_config=self.gdal_config)
+
+    def build_extensions(self):
+        # Add a -std=c++11 or similar flag if needed
+        ct = self.compiler.compiler_type
+        if ct == 'unix' and not supports_cxx11(self.compiler):
+            cxx11_flag = None
+            if supports_cxx11(self.compiler, '-std=c++11'):
+                cxx11_flag = '-std=c++11'
+            if cxx11_flag:
+                for ext in self.extensions:
+                    # gdalconst builds as a .c file
+                    if ext.name != 'osgeo._gdalconst':
+                        ext.extra_compile_args += [cxx11_flag]
+        build_ext.build_extensions(self)
 
     def finalize_options(self):
         if self.libraries is None:
@@ -68,6 +124,14 @@ class gdal_ext(build_ext):
         self.library_dirs.append(os.path.join(self.gdaldir, 'lib'))
         self.include_dirs.append(os.path.join(self.gdaldir, 'include', 'gdal'))
         self.include_dirs.append(os.path.join(self.gdaldir, 'include'))
+
+        cflags = self.get_gdal_config('cflags')
+        if cflags:
+            self.extra_cflags = cflags.split()
+
+    def build_extension(self, ext):
+        ext.extra_compile_args.extend(self.extra_cflags)
+        return build_ext.build_extension(self, ext)
 
 
 extra_link_args = []
