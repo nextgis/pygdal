@@ -10,4 +10,7 @@ find . -type f -regex ".*/osgeo/.*\.py" -print | xargs sed -i \
     -e 's/^\(\s*\)import gdal/\1from osgeo import gdal/g' \
     -e 's/^\(\s*\)from gdal_array import \*/\1from osgeo.gdal_array import \*/g' \
     -e 's/^\(\s*\)import osr/\1from osgeo import osr/g' \
-    -e 's/^\(\s*\)import ogr/\1from osgeo import ogr/g'
+    -e 's/^\(\s*\)import ogr/\1from osgeo import ogr/g' \
+    -e 's/^\(\s*\)from \. import ogr/\1from osgeo import ogr/g' \
+    -e 's/^\(\s*\)from \. import osr/\1from osgeo import osr/g' \
+    -e 's/^\(\s*\)from \. import gdal/\1from osgeo import gdal/g'
