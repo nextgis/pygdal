@@ -26,7 +26,7 @@ Or you can install package directly from PyPi:
 ::
 
   $ virtualenv --no-site-packages env
-  $ env/bin/pip install pygdal>=1.8.1.0,<=1.8.1.999
+  $ env/bin/pip install pygdal=="`gdal-config --version`.*"
 
 The trick with range of versions required to support pygdal versioning.
 
