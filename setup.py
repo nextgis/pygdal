@@ -9,9 +9,11 @@ from setuptools.command.build_ext import build_ext
 from distutils.errors import CompileError
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '4'
+PKG_VERSION = '5'
 
 ENV_GDALHOME = 'GDALHOME'
+
+PY2 = sys.version_info[0] == 2
 
 
 class GDALConfigError(Exception):
@@ -208,7 +210,8 @@ classifiers = [
     'Topic :: Scientific/Engineering :: Information Analysis',
 ]
 
-requires = ['numpy>=1.0.0', ]
+# NumPy doesn't support Python 2.x since 1.17
+requires = ['numpy>=1.0.0' + (',<1.17' if PY2 else ''), ]
 
 setup(
     name=name,
