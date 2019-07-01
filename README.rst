@@ -37,7 +37,7 @@ If you installed GDAL using the `KyngChaos frameworks <http://www.kyngchaos.com/
 ::
 
   $ export GDALHOME="/Library/Frameworks/GDAL.framework/Versions/Current/unix/"
-  $ env/bin/pip install pygdal>=1.8.1.0,<=1.8.1.999
+  $ env/bin/pip install pygdal=="`gdal-config --version`.*"
 
 After package is installed you can use is same way as standard GDAL bindings:
 
