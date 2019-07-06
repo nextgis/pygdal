@@ -225,6 +225,7 @@ setup(
 
     description=description,
     long_description=long_description,
+    long_description_content_type='text/x-rst',
     url=url,
 
     license=license,
