@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+while read GDAL_VERSION; do
+    echo "Processing ${GDAL_VERSION} ..."
+    ./import ${GDAL_VERSION}
+    ./publish ${GDAL_VERSION}
+done <VERSIONS
