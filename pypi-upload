@@ -1,7 +1,0 @@
-#!/bin/bash
-
-TMP=`mktemp -d`
-cp -LR $1/* $TMP
-cd $TMP
-python setup.py sdist upload
-cd -
