@@ -1806,8 +1806,8 @@ class Driver(MajorObject):
 Driver_swigregister = _gdal.Driver_swigregister
 Driver_swigregister(Driver)
 
-from osgeo import ogr
-from osgeo import osr
+from . import ogr
+from . import osr
 class ColorEntry(_object):
     """Proxy of C++ GDALColorEntry class."""
 

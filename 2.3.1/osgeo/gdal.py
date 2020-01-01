@@ -107,8 +107,8 @@ def deprecation_warn( module ):
        DeprecationWarning)
 
 
-from osgeo.gdalconst import *
-from osgeo import gdalconst
+from gdalconst import *
+import gdalconst
 
 
 import sys
@@ -1624,8 +1624,8 @@ class Driver(MajorObject):
 Driver_swigregister = _gdal.Driver_swigregister
 Driver_swigregister(Driver)
 
-from osgeo import ogr
-from osgeo import osr
+import ogr
+import osr
 class ColorEntry(_object):
     """Proxy of C++ GDALColorEntry class."""
 
@@ -2081,7 +2081,7 @@ class Dataset(MajorObject):
         """ Reading a chunk of a GDAL band into a numpy array. The optional (buf_xsize,buf_ysize,buf_type)
         parameters should generally not be specified if buf_obj is specified. The array is returned"""
 
-        from osgeo import gdalnumeric
+        import gdalnumeric
         return gdalnumeric.DatasetReadAsArray( self, xoff, yoff, xsize, ysize, buf_obj,
                                                buf_xsize, buf_ysize, buf_type,
                                                resample_alg = resample_alg,
@@ -2149,7 +2149,7 @@ class Dataset(MajorObject):
            Any reference to the array must be dropped before the last reference to the
            related dataset is also dropped.
         """
-        from osgeo import gdalnumeric
+        import gdalnumeric
         if xsize is None:
             xsize = self.RasterXSize
         if ysize is None:
@@ -2184,7 +2184,7 @@ class Dataset(MajorObject):
            Any reference to the array must be dropped before the last reference to the
            related dataset is also dropped.
         """
-        from osgeo import gdalnumeric
+        import gdalnumeric
         if xsize is None:
             xsize = self.RasterXSize
         if ysize is None:
@@ -2602,7 +2602,7 @@ class Band(MajorObject):
         """ Reading a chunk of a GDAL band into a numpy array. The optional (buf_xsize,buf_ysize,buf_type)
         parameters should generally not be specified if buf_obj is specified. The array is returned"""
 
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.BandReadAsArray( self, xoff, yoff,
                                             win_xsize, win_ysize,
@@ -2615,7 +2615,7 @@ class Band(MajorObject):
                    resample_alg = GRIORA_NearestNeighbour,
                    callback = None,
                    callback_data = None):
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.BandWriteArray( self, array, xoff, yoff,
                                            resample_alg = resample_alg,
@@ -2632,7 +2632,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          from osgeo import gdalnumeric
+          import gdalnumeric
           if xsize is None:
               xsize = self.XSize
           if ysize is None:
@@ -2655,7 +2655,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          from osgeo import gdalnumeric
+          import gdalnumeric
           if options is None:
               virtualmem = self.GetVirtualMemAuto(eAccess)
           else:
@@ -2672,7 +2672,7 @@ class Band(MajorObject):
              Any reference to the array must be dropped before the last reference to the
              related dataset is also dropped.
           """
-          from osgeo import gdalnumeric
+          import gdalnumeric
           if xsize is None:
               xsize = self.XSize
           if ysize is None:
@@ -2868,12 +2868,12 @@ class RasterAttributeTable(_object):
 
 
     def WriteArray(self, array, field, start=0):
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.RATWriteArray(self, array, field, start)
 
     def ReadAsArray(self, field, start=0, length=None):
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.RATReadArray(self, field, start, length)
 

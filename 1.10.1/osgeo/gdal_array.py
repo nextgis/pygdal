@@ -80,8 +80,8 @@ def BandRasterIONumPy(*args, **kwargs):
 import numpy
 import _gdal_array
 
-from osgeo import gdalconst
-from osgeo import gdal
+import gdalconst
+import gdal
 gdal.AllRegister()
 
 codes = {   gdalconst.GDT_Byte      :   numpy.uint8,

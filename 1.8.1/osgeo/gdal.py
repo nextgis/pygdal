@@ -80,8 +80,8 @@ def deprecation_warn( module ):
        DeprecationWarning)
        
        
-from osgeo.gdalconst import *
-from osgeo import gdalconst
+from gdalconst import *
+import gdalconst
 
 
 import sys
@@ -723,7 +723,7 @@ class Dataset(MajorObject):
         return _gdal.Dataset_ReadRaster1(self, *args, **kwargs)
 
     def ReadAsArray(self, xoff=0, yoff=0, xsize=None, ysize=None, buf_obj=None ):
-        from osgeo import gdalnumeric
+        import gdalnumeric
         return gdalnumeric.DatasetReadAsArray( self, xoff, yoff, xsize, ysize, buf_obj )
     def WriteRaster(self, xoff, yoff, xsize, ysize,
                     buf_string,
@@ -1024,14 +1024,14 @@ class Band(MajorObject):
 
     def ReadAsArray(self, xoff=0, yoff=0, win_xsize=None, win_ysize=None,
                     buf_xsize=None, buf_ysize=None, buf_obj=None):
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.BandReadAsArray( self, xoff, yoff,
                                             win_xsize, win_ysize,
                                             buf_xsize, buf_ysize, buf_obj )
       
     def WriteArray(self, array, xoff=0, yoff=0):
-        from osgeo import gdalnumeric
+        import gdalnumeric
 
         return gdalnumeric.BandWriteArray( self, array, xoff, yoff )
 

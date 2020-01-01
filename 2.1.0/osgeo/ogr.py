@@ -223,7 +223,7 @@ def UseExceptions(*args):
 def DontUseExceptions(*args):
   """DontUseExceptions()"""
   return _ogr.DontUseExceptions(*args)
-from osgeo import osr
+import osr
 class MajorObject(_object):
     """Proxy of C++ GDALMajorObjectShadow class"""
     __swig_setmethods__ = {}

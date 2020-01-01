@@ -253,7 +253,7 @@ del _MyHelper
 del _Module
 
 
-from osgeo import osr
+import osr
 class MajorObject(_object):
     """Proxy of C++ GDALMajorObjectShadow class"""
     __swig_setmethods__ = {}

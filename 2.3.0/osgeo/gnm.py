@@ -102,8 +102,8 @@ def UseExceptions(*args):
 def DontUseExceptions(*args):
     """DontUseExceptions()"""
     return _gnm.DontUseExceptions(*args)
-from osgeo import ogr
-from osgeo import osr
+import ogr
+import osr
 
 _gnm.GATDijkstraShortestPath_swigconstant(_gnm)
 GATDijkstraShortestPath = _gnm.GATDijkstraShortestPath

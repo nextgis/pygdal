@@ -69,7 +69,7 @@ except AttributeError:
     _newclass = 0
 
 
-from osgeo import gdal
+import gdal
 class VirtualMem(_object):
     """Proxy of C++ CPLVirtualMemShadow class"""
     __swig_setmethods__ = {}
@@ -147,8 +147,8 @@ RATValuesIONumPyRead = _gdal_array.RATValuesIONumPyRead
 import numpy
 import _gdal_array
 
-from osgeo import gdalconst
-from osgeo import gdal
+import gdalconst
+import gdal
 gdal.AllRegister()
 
 codes = {   gdalconst.GDT_Byte      :   numpy.uint8,
