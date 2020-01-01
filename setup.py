@@ -9,7 +9,7 @@ from setuptools.command.build_ext import build_ext
 from distutils.errors import CompileError
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '5'
+PKG_VERSION = '6'
 
 ENV_GDALHOME = 'GDALHOME'
 
@@ -213,6 +213,26 @@ classifiers = [
 # NumPy doesn't support Python 2.x since 1.17
 requires = ['numpy>=1.0.0' + (',<1.17' if PY2 else ''), ]
 
+extra = dict()
+if sys.version_info >= (3,):
+    from lib2to3.refactor import get_fixers_from_package
+
+    fixer_names = [
+        'lib2to3.fixes.fix_import',
+        'lib2to3.fixes.fix_next',
+        'lib2to3.fixes.fix_renames',
+        'lib2to3.fixes.fix_unicode',
+        'lib2to3.fixes.fix_ws_comma',
+        'lib2to3.fixes.fix_xrange',
+    ]
+
+    all_fixers = set(get_fixers_from_package('lib2to3.fixes'))
+    exclude_fixers = sorted(all_fixers.difference(fixer_names))
+
+    extra['use_2to3'] = True
+    extra['use_2to3_fixers'] = []
+    extra['use_2to3_exclude_fixers'] = exclude_fixers
+
 setup(
     name=name,
     version=version,
@@ -239,4 +259,5 @@ setup(
     ext_modules=ext_modules,
     zip_safe=False,
     cmdclass=dict(build_ext=gdal_ext),
+    **extra
 )

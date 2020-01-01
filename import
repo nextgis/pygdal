@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+GDAL_VERSION=$1
+mkdir $GDAL_VERSION
+wget -q https://github.com/OSGeo/gdal/archive/v${GDAL_VERSION}.tar.gz -O - \
+    | tar xz --strip-components=4 -C ${GDAL_VERSION} gdal-${GDAL_VERSION}/gdal/swig/python/
+
+rm -rf ${GDAL_VERSION}/samples ${GDAL_VERSION}/scripts
+find ${GDAL_VERSION} -maxdepth 1 -type f -exec rm -f {} \;
+
+echo ${GDAL_VERSION} > ${GDAL_VERSION}/GDAL_VERSION
+ln -s ../setup.py ${GDAL_VERSION}/
+ln -s ../MANIFEST.in ${GDAL_VERSION}/
+ln -s ../README.rst ${GDAL_VERSION}/
