@@ -3,13 +3,13 @@ import os
 import sys
 from subprocess import check_output, CalledProcessError
 
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 
 from distutils.errors import CompileError
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '6'
+PKG_VERSION = '7'
 
 ENV_GDALHOME = 'GDALHOME'
 
@@ -177,7 +177,7 @@ ext_modules = [
     gdal_array_module,
 ]
 
-packages = ["osgeo", ]
+packages =  find_packages()
 
 name = 'pygdal'
 version = GDAL_VERSION + '.' + PKG_VERSION
@@ -255,6 +255,7 @@ setup(
     setup_requires=requires,
     install_requires=requires,
 
+    include_package_data=True,
     packages=packages,
     ext_modules=ext_modules,
     zip_safe=False,
