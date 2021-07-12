@@ -30,7 +30,7 @@ Or you can install package directly from PyPi:
 
 The trick with range of versions required to support pygdal versioning.
 
-The supported versions are ``1.8.1`` - ``3.3.0``. Package ``numpy`` is also listed as a dependency (using ``setup_requires`` and ``install_requires`` directives), so you do not need to install it before installing GDAL.
+The supported versions are ``1.8.1`` - ``3.3.1``. Package ``numpy`` is also listed as a dependency (using ``setup_requires`` and ``install_requires`` directives), so you do not need to install it before installing GDAL.
 
 If you installed GDAL using the `KyngChaos frameworks <http://www.kyngchaos.com/software/frameworks/>`_, you may need to override the default values returned by ``gdal-config --prefix`` in order to install this package. This can be accomplished by setting the ``GDALHOME`` environment variable, e.g.
 
