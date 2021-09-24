@@ -276,7 +276,7 @@ def Info(ds, **kwargs):
     if isinstance(ds, str):
         ds = Open(ds)
     ret = InfoInternal(ds, opts)
-    if format == 'json' and deserialize:
+    if format == 'json' and deserialize and ret is not None:
         import json
         ret = json.loads(ret)
     return ret
