@@ -3,6 +3,6 @@ set -e
 
 while read GDAL_VERSION; do
     echo "Processing ${GDAL_VERSION} ..."
-    ./import ${GDAL_VERSION}
+    python import.py ${GDAL_VERSION}
     ./publish ${GDAL_VERSION}
 done <VERSIONS

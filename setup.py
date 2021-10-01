@@ -9,11 +9,16 @@ from setuptools.command.build_ext import build_ext
 from distutils.errors import CompileError
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '7'
+PKG_VERSION = '10'
 
 ENV_GDALHOME = 'GDALHOME'
 
 PY2 = sys.version_info[0] == 2
+GVP = tuple(map(int, GDAL_VERSION.split('.')))
+MULTIPY = GVP < (3, 3)
+PACKAGE_DIR = ('py' + sys.version[0]) if MULTIPY else '.'
+
+python_requires = '>=3.6' if GVP >= (3, 3) else None
 
 
 class GDALConfigError(Exception):
@@ -177,7 +182,8 @@ ext_modules = [
     gdal_array_module,
 ]
 
-packages =  find_packages()
+packages =  find_packages(where=PACKAGE_DIR)
+# raise Exception(packages)
 
 name = 'pygdal'
 version = GDAL_VERSION + '.' + PKG_VERSION
@@ -204,6 +210,7 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 3',
     'Programming Language :: C',
     'Programming Language :: C++',
     'Topic :: Scientific/Engineering :: GIS',
@@ -214,24 +221,6 @@ classifiers = [
 requires = ['numpy>=1.0.0' + (',<1.17' if PY2 else ''), ]
 
 extra = dict()
-if sys.version_info >= (3,):
-    from lib2to3.refactor import get_fixers_from_package
-
-    fixer_names = [
-        'lib2to3.fixes.fix_import',
-        'lib2to3.fixes.fix_next',
-        'lib2to3.fixes.fix_renames',
-        'lib2to3.fixes.fix_unicode',
-        'lib2to3.fixes.fix_ws_comma',
-        'lib2to3.fixes.fix_xrange',
-    ]
-
-    all_fixers = set(get_fixers_from_package('lib2to3.fixes'))
-    exclude_fixers = sorted(all_fixers.difference(fixer_names))
-
-    extra['use_2to3'] = True
-    extra['use_2to3_fixers'] = []
-    extra['use_2to3_exclude_fixers'] = exclude_fixers
 
 setup(
     name=name,
@@ -249,14 +238,15 @@ setup(
     url=url,
 
     license=license,
-
     classifiers=classifiers,
 
     setup_requires=requires,
     install_requires=requires,
+    python_requires=python_requires,
 
     include_package_data=True,
     packages=packages,
+    package_dir={"": PACKAGE_DIR},
     ext_modules=ext_modules,
     zip_safe=False,
     cmdclass=dict(build_ext=gdal_ext),

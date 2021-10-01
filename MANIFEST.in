@@ -1,1 +1,3 @@
 include GDAL_VERSION
+recursive-include py2 *.py
+recursive-include py3 *.py
