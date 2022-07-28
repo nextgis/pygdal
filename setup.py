@@ -24,10 +24,16 @@ python_requires = '>=3.6' if GVP >= (3, 3) else None
 class GDALConfigError(Exception):
     pass
 
+def set_builtin(name, value):
+    if isinstance(__builtins__, dict):
+        __builtins__[name] = value
+    else:
+        setattr(__builtins__, name, value)
+
 
 def get_numpy_include():
     # Fix numpy installation using setuptools
-    __builtins__.__NUMPY_SETUP__ = False
+    set_builtin('__NUMPY_SETUP__', False)
 
     import numpy
     return numpy.get_include()
