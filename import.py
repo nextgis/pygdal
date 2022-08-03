@@ -27,10 +27,20 @@ if __name__ == "__main__":
         unpack = base
 
     url = f"https://github.com/OSGeo/gdal/archive/v{args.version}.tar.gz"
-    tar(
-        wget(url, "-O", "-"),
-        "xz", "--strip-components=4", "-C", str(unpack),
-        f"gdal-{args.version}/gdal/swig/python")
+
+    if parse_version(args.version) < parse_version("3.5"):
+
+        tar(
+            wget(url, "-O", "-"),
+            "xz", "--strip-components=4", "-C", str(unpack),
+            f"gdal-{args.version}/gdal/swig/python")
+    else:
+
+        tar(
+            wget(url, "-O", "-"),
+            "xz", "--strip-components=3", "-C", str(unpack),
+            f"gdal-{args.version}/swig/python")
+
     
     for d in ("samples", "scripts", "gdal-utils"):
         if (unpack / d).is_dir():
