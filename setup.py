@@ -9,7 +9,7 @@ from setuptools.command.build_ext import build_ext
 from distutils.errors import CompileError
 
 GDAL_VERSION = open('GDAL_VERSION', 'r').read().strip()
-PKG_VERSION = '10'
+PKG_VERSION = '11'
 
 ENV_GDALHOME = 'GDALHOME'
 
