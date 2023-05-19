@@ -32,6 +32,23 @@ The trick with range of versions required to support pygdal versioning.
 
 The supported versions are ``1.8.1`` - ``3.5.2``. Package ``numpy`` is also listed as a dependency (using ``setup_requires`` and ``install_requires`` directives), so you do not need to install it before installing GDAL.
 
+on macOS
+-----
+
+Recommended up-to-date package with M1 builds is `Postgres.app <https://postgresapp.com/>`_
+
+Use the following:
+
+
+
+::
+
+ export GDALHOME="/Applications/Postgres.app/Contents/Versions/latest"
+ env/bin/pip install pygdal=="`gdal-config --version`.*"
+
+::
+
+
 If you installed GDAL using the `KyngChaos frameworks <http://www.kyngchaos.com/software/frameworks/>`_, you may need to override the default values returned by ``gdal-config --prefix`` in order to install this package. This can be accomplished by setting the ``GDALHOME`` environment variable, e.g.
 
 ::
