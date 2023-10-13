@@ -203,7 +203,7 @@ maintainer_email = "me@dezhin.net"
 description = "Virtualenv and setuptools friendly " \
     + "version of standard GDAL python bindings"
 
-long_description = str(open('README.rst', 'rb').read())
+long_description = str(open('README.md', 'r').read())
 
 url = "https://github.com/nextgis/pygdal"
 
@@ -240,7 +240,7 @@ setup(
 
     description=description,
     long_description=long_description,
-    long_description_content_type='text/x-rst',
+    long_description_content_type='text/markdown',
     url=url,
 
     license=license,

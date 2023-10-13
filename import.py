@@ -59,5 +59,5 @@ if __name__ == "__main__":
             str(py3))
 
     (base / 'GDAL_VERSION').write_text(args.version)
-    for s in ("setup.py", "MANIFEST.in", "README.rst"):
+    for s in ("setup.py", "MANIFEST.in", "README.md"):
         (base / s).symlink_to("../" + s)
