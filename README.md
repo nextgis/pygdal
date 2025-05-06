@@ -6,7 +6,7 @@ to install GDAL library and its header files on your system. On Ubuntu it can be
 done this way:
 
 ```bash
-$ sudo apt-get install libgdal1-dev
+$ sudo apt-get install libgdal-dev
 ```
 
 Version of the same package, and GDAL, so that if you have installed GDAL 3.6.4
