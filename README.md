@@ -1,4 +1,8 @@
-# Virtualenv friendly GDAL bindings for Python
+# Virtualenv friendly GDAL < 3.7 bindings for Python
+
+**IMPORTANT NOTE:** Starting with version 3.7, GDAL can be installed directly
+from PyPI without major issues. Therefore, you should not need this package for
+GDAL 3.7 or later. Pygdal 3.6.* will be the last release of this package.
 
 This package is for you if you had problems installing GDAL in your virtualenv.
 You can install GDAL into your virtualenv using this package but you still need
